@@ -1,28 +1,30 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <nav class="navbar bg-dark text-light">
+      <span class="navbar-brand"><i class="fas fa-shopping-bag mx-2"></i> CHECK IT OUT!</span>
+    </nav>
+
+    <div class="container-fluid mt-3">
+      <!--    <img alt="Vue logo" src="./assets/logo.png">-->
+      <!--    <hello-universe msg="Welcome to Your Vue.js App"/>-->
+      <library-list></library-list>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+// import HelloUniverse from './components/HelloWorld.vue'
+import LibraryList from "@/components/LibraryList";
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    LibraryList,
+    // HelloUniverse
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
