@@ -10,8 +10,8 @@
       <library-list @update-cart="receive"></library-list>
     </div>
     <div class="container-fluid mt-3">
-      <h1>Toaster</h1>
-      <cart-list :cart="cartstuff" ></cart-list>
+      <h1>Temp Cart</h1>
+      <cart-list :cart-list="cartstuff"></cart-list>
     </div>
   </div>
 </template>
@@ -24,15 +24,18 @@ import CartCollection from "@/models/CartCollection";
 export default {
   name: 'App',
   components: {LibraryList, CartList},
-  data(){
-    return{
+  data: function () {
+    return {
       cartstuff: new CartCollection()
     }
   }
   ,methods:{
     receive(e){
-      console.log(e)
-      this.cartstuff.addItem(e);
+      if (!this.cartstuff.find(ex => ex === e)){
+        this.cartstuff.addItem(e);
+      }
+
+
     }
   }
 
