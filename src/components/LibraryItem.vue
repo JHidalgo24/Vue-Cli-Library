@@ -9,7 +9,7 @@
       <!--                <button v-if="removeMethod" @click="removeMethod(item);">Remove</button>-->
       <!--                <button @click="$emit('remove-me', item);">Remove</button>-->
       <button @click="item.remove()">Remove</button>
-      <button @click="emitSelf">Add to Cart</button>
+      <button @click="emitSelf">Add to Bag</button>
     </div>
   </div>
 </template>

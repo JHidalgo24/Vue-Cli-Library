@@ -11,7 +11,7 @@
     </div>
     <div class="container-fluid mt-3">
       <h1>Temp Cart</h1>
-      <cart-list :cart-list="cartstuff"></cart-list>
+      <cart-list :cart="cartstuff"></cart-list>
     </div>
   </div>
 </template>
@@ -33,9 +33,8 @@ export default {
     receive(e){
       if (!this.cartstuff.find(ex => ex === e)){
         this.cartstuff.addItem(e);
+        console.log(this.cartstuff)
       }
-
-
     }
   }
 
