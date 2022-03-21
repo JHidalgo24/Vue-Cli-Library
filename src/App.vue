@@ -7,21 +7,35 @@
     <div class="container-fluid mt-3">
       <!--    <img alt="Vue logo" src="./assets/logo.png">-->
       <!--    <hello-universe msg="Welcome to Your Vue.js App"/>-->
-      <library-list></library-list>
+      <library-list @update-cart="receive"></library-list>
+    </div>
+    <div class="container-fluid mt-3">
+      <h1>Toaster</h1>
+      <cart-list :cart="cartstuff" ></cart-list>
     </div>
   </div>
 </template>
 
 <script>
-// import HelloUniverse from './components/HelloWorld.vue'
 import LibraryList from "@/components/LibraryList";
+import CartList from "@/components/CartList";
+import CartCollection from "@/models/CartCollection";
 
 export default {
   name: 'App',
-  components: {
-    LibraryList,
-    // HelloUniverse
+  components: {LibraryList, CartList},
+  data(){
+    return{
+      cartstuff: new CartCollection()
+    }
   }
+  ,methods:{
+    receive(e){
+      console.log(e)
+      this.cartstuff.addItem(e);
+    }
+  }
+
 }
 </script>
 

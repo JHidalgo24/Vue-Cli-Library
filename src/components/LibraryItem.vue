@@ -9,6 +9,7 @@
       <!--                <button v-if="removeMethod" @click="removeMethod(item);">Remove</button>-->
       <!--                <button @click="$emit('remove-me', item);">Remove</button>-->
       <button @click="item.remove()">Remove</button>
+      <button @click="emitSelf">Add to Cart</button>
     </div>
   </div>
 </template>
@@ -30,6 +31,12 @@ export default {
       type: Function,
     }
   },
+  methods:{
+    emitSelf(){
+      this.$emit('update-cart',this.item)
+    }
+  }
+  ,
   computed: {
     typeOfItem() {
       return this.item.constructor.name + 'Details';
