@@ -1,15 +1,15 @@
 <template>
   <div class="card-columns">
-    <library-item v-for="(item, i) in cart" :key="i" :item="item"></library-item>
+    <cart-item @remove-cart="$emit('remove-cart',item)" v-for="(item, i) in cart" :key="i" :item="item"></cart-item>
   </div>
 </template>
 
 <script>
-import LibraryItem from "@/components/LibraryItem";
+import CartItem from "@/components/CartItem";
 
 export default {
   name: "CartList",
-  components:{LibraryItem},
+  components:{CartItem},
   props:{
     cart:{
       type:[],

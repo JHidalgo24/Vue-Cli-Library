@@ -5,6 +5,9 @@ export default function CartCollection(){
     // inherit array functionality (ES6+)
     this.__proto__ = [];
 
+    this.push(0);
+    this.splice(0,1);
+
     this.addItem = function(item){
         // option 1
         //this.push(new LibraryItem(item, item => this.removeItem(item)));

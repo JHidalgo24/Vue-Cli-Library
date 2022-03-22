@@ -11,7 +11,7 @@
     </div>
     <div class="container-fluid mt-3">
       <h1>Temp Cart</h1>
-      <cart-list :cart="cartstuff"></cart-list>
+      <cart-list @remove-cart="removeCart" :cart="cart"></cart-list>
     </div>
   </div>
 </template>
@@ -26,15 +26,20 @@ export default {
   components: {LibraryList, CartList},
   data: function () {
     return {
-      cartstuff: new CartCollection()
+      cart: new CartCollection()
     }
   }
   ,methods:{
     receive(e){
-      if (!this.cartstuff.find(ex => ex === e)){
-        this.cartstuff.addItem(e);
-        console.log(this.cartstuff)
+      if (!this.cart.find(ex => ex === e)){
+        this.cart.addItem(e);
+        console.log(this.cart)
       }
+    },
+    removeCart(e){
+      console.log(e)
+      console.log("Removed")
+      this.cart.removeItem(e)
     }
   }
 
