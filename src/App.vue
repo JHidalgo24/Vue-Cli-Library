@@ -2,16 +2,18 @@
   <div id="app">
     <nav class="navbar bg-dark text-light">
       <span class="navbar-brand"><i class="fas fa-shopping-bag mx-2"></i> CHECK IT OUT!</span>
+      &nbsp;
+      <a @click="cartVisibility = !cartVisibility"><span class="navbar-brand"><i class="fas fa-shopping-bag mx-2"></i>{{this.cart.length}}</span></a>
     </nav>
 
-    <div class="container-fluid mt-3">
+    <div v-show="cartVisibility" class="container-fluid mt-3">
       <!--    <img alt="Vue logo" src="./assets/logo.png">-->
       <!--    <hello-universe msg="Welcome to Your Vue.js App"/>-->
       <library-list @update-cart="receive"></library-list>
     </div>
-    <div class="container-fluid mt-3">
+    <div v-show="!cartVisibility" class="container-fluid mt-3">
       <h1>Temp Cart</h1>
-      <cart-list @remove-cart="removeCart" :cart="cart"></cart-list>
+      <cart-list @check-out="updateCheckouts" @remove-cart="removeCart" :cart="cart"></cart-list>
     </div>
   </div>
 </template>
@@ -26,7 +28,8 @@ export default {
   components: {LibraryList, CartList},
   data: function () {
     return {
-      cart: new CartCollection()
+      cart: new CartCollection(),
+      cartVisibility: true
     }
   }
   ,methods:{
@@ -40,12 +43,21 @@ export default {
       console.log(e)
       console.log("Removed")
       this.cart.removeItem(e)
+    },
+    updateCheckouts(){
+      console.log("This was checked out ")
+      for (let i = 0; i < this.cart.length; i++) {
+        console.log(this.cart[i])
+        this.cart[i].checkOut();
+      }
     }
   }
 
 }
 </script>
 
-<style>
-
+<style scoped>
+a{
+ color: white;
+}
 </style>

@@ -42,10 +42,19 @@ export default function CartCollection(){
     }
 
     this.removeItem = function(item){
-        this.splice(this.indexOf(item), 1);
+
+        this.splice(this.indexOf(item));
 
         return this;
     }
+
+    this.removeAll = function(){
+
+        this.splice(0, this.length);
+
+        return this;
+    }
+
 }
 // standard way pre-ES6
 // LibraryCollection.prototype = [];

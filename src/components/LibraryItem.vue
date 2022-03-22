@@ -8,8 +8,8 @@
       <button v-else @click="item.checkIn()">Check In</button>
       <!--                <button v-if="removeMethod" @click="removeMethod(item);">Remove</button>-->
       <!--                <button @click="$emit('remove-me', item);">Remove</button>-->
-      <button @click="item.remove()">Remove</button>
-      <button @click="emitSelf">Add to Bag</button>
+      <button @click="emitSelfRemove">Remove</button>
+      <button @click="emitSelfAdd">Add to Bag</button>
     </div>
   </div>
 </template>
@@ -32,8 +32,11 @@ export default {
     }
   },
   methods:{
-    emitSelf(){
+    emitSelfAdd(){
       this.$emit('update-cart',this.item)
+    },
+    emitSelfRemove(){
+      this.$emit('remove-store',this.item)
     }
   }
   ,
