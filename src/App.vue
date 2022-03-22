@@ -36,18 +36,13 @@ export default {
     receive(e){
       if (!this.cart.find(ex => ex === e)){
         this.cart.addItem(e);
-        console.log(this.cart)
       }
     },
     removeCart(e){
-      console.log(e)
-      console.log("Removed")
       this.cart.removeItem(e)
     },
     updateCheckouts(){
-      console.log("This was checked out ")
       for (let i = 0; i < this.cart.length; i++) {
-        console.log(this.cart[i])
         this.cart[i].checkOut();
       }
     }
