@@ -19,8 +19,8 @@ export default {
           .addItem(new Book('Learn Vue', 345))
           .addItem(new Movie('The Muppets', 107))
           .addItem(new Movie('Strange Brew', 97))
-          .addItem(new Album('Title 1','Artist',12))
-          .addItem(new Album('Title 2', 'Artist', 13)),
+          .addItem(new Album('American III: Solitary Man','Johnny Cash',14))
+          .addItem(new Album('Doo Wop Classics', 'Various Artists', 12)),
       page: 1
     }
   },
