@@ -4,9 +4,7 @@
       <component :is="typeOfItem" :item="item"></component>
     </div>
     <div class="card-footer">
-      <button v-if="item.isAvailable()" @click="item.checkOut()">Check Out</button>
-      <button v-else @click="item.checkIn()">Check In</button>
-      <button @click="$emit('remove-cart',item)">Remove</button>
+      <button @click="$emit('remove-cart',item)">Remove From Cart</button>
     </div>
   </div>
 </template>

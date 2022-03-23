@@ -1,9 +1,10 @@
 <template>
+  <div >
   <div class="card-columns">
     <cart-item @remove-cart="$emit('remove-cart',item)" v-for="(item, i) in cart" :key="i" :item="item"></cart-item>
+  </div>
     <button type="button" @click="checkOutItems">Check Out All</button>
   </div>
-
 </template>
 
 <script>
