@@ -1,31 +1,11 @@
+import Collection from "@/models/Collection";
 import {LibraryItem} from "@/models/LibraryItems";
-//import {LibraryItem} from "./LibraryItems";
 
 export default function LibraryCollection(){
-    // inherit array functionality (ES6+)
-    this.__proto__ = [];
+    return new Collection(LibraryItem);
 
-    this.push(0);
-    this.splice(0,1);
-
-
-    this.addItem = function(item){
-
-        this.push(new LibraryItem(item, (collection =>
-                    function(){
-                        collection.removeItem(this); // this === item
-                    }
-            )(this) // this === collection
-        ));
-        return this;
-    }
-
-    this.removeItem = function(item){
-        this.splice(this.indexOf(item), 1);
-
-        return this;
-    }
+    // or
+    //let arr =  new Collection(LibraryItem);
+    //arr.something = '';
+    //return arr;
 }
-// standard way pre-ES6
-// LibraryCollection.prototype = [];
-// LibraryCollection.prototype.constructor = LibraryCollection;
