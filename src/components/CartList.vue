@@ -21,6 +21,7 @@ export default {
   },
   methods:{
     checkOutItems(){
+
       this.$emit('check-out',this.cart)
       this.cart.removeAll()
     }

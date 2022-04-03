@@ -6,30 +6,25 @@
 
 <script>
 import LibraryItem from "@/components/LibraryItem";
-import LibraryCollection from "@/models/LibraryCollection";
-import {Book, Movie,Album} from "@/models/LibraryItems";
+
 
 export default {
   name: "LibraryList",
   components: {LibraryItem},
+  props:{
+    library:{
+      type:[],
+      required:true
+    }
+  },
   data() {
     return {
-      library: new LibraryCollection()
-          .addItem(new Book('Interaction Design', 234))
-          .addItem(new Book('Learn Vue', 345))
-          .addItem(new Movie('The Muppets', 107))
-          .addItem(new Movie('Strange Brew', 97))
-          .addItem(new Album('American III: Solitary Man','Johnny Cash',14))
-          .addItem(new Album('Doo Wop Classics', 'Various Artists', 12)),
       page: 1
     }
   },
   methods:{
     removeMe(e){
-
       this.library.removeItem(e);
-
-
     }
   }
 ,

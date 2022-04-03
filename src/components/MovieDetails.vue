@@ -1,7 +1,7 @@
 <template>
   <div class="movie">
-    <h3 class="card-title">{{item.title}}</h3>
-    <p class="card-text">Runtime: {{item.runtime}}</p>
+    <h3 class="card-title">{{item.trackName}}</h3>
+    <p class="card-text">Genre: {{item.genre}}</p>
   </div>
 </template>
 

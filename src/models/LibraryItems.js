@@ -47,25 +47,64 @@ function Book(title, pages){
 
 // or ES6 syntactic sugar (these are not really classes in the traditional sense)
 class Movie {
-    title = '';
-    runtime = 0;
-
-    constructor(title, runtime){
-        this.title = title;
-        this.runtime = runtime;
+    trackName = '';
+    genre = ''
+    description = ''
+    releaseDate = ''
+    contentRating = ''
+    constructor(trackName, genre, description, releaseDate, contentRating){
+        this.trackName = trackName;
+        this.genre = genre
+        this.description = description
+        this.releaseDate = releaseDate
+        this.contentRating = contentRating
     }
 }
 
 class Album{
-    title = '';
-    artist = '';
+    collectionName = '';
+    artistName = '';
     trackCount = '';
+    releaseDate = ''
 
-    constructor(title, artist, trackCount) {
-        this.title = title;
-        this.artist = artist;
+    constructor(collectionName, artistName, trackCount,releaseDate) {
+        this.collectionName = collectionName;
+        this.artistName = artistName;
         this.trackCount = trackCount;
+        this.releaseDate = releaseDate
     }
 }
 
-export {LibraryItem, Book, Movie, Album};
+class Song{
+    artistName = '';
+    trackName = '';
+    releaseDate = '';
+
+    constructor(artistName, trackName, releaseDate) {
+        this.artistName = artistName;
+        this.trackName = trackName;
+        this.releaseDate = releaseDate;
+    }
+
+}
+
+class EBook{
+    artistName = '';
+    trackName = '';
+    releaseDate = '';
+    description = '';
+    averageUserRating = 0;
+
+    constructor(artistName, trackName, releaseDate,description,averageUserRating) {
+        this.artistName = artistName;
+        this.trackName = trackName;
+        this.releaseDate = releaseDate;
+        this.description = description
+        this.averageUserRating = averageUserRating
+    }
+
+}
+
+
+
+export {LibraryItem, Book, Movie, Album,Song, EBook};

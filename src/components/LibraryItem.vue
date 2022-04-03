@@ -18,10 +18,12 @@
 import BookDetails from "@/components/BookDetails";
 import MovieDetails from "@/components/MovieDetails";
 import AlbumDetails from "@/components/AlbumDetails";
+import SongDetails from "@/components/SongDetails";
+import EBookDetails from "@/components/EBookDetails";
 
 export default {
   name: "LibraryItem",
-  components: {BookDetails, MovieDetails,AlbumDetails},
+  components: {EBookDetails, SongDetails,BookDetails, MovieDetails,AlbumDetails},
   props: {
     item: {
       type: Object,

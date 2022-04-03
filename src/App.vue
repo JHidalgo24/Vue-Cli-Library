@@ -3,13 +3,19 @@
     <nav class="navbar bg-dark text-light">
       <span class="navbar-brand"><i class="fas fa-shopping-bag mx-2"></i> CHECK IT OUT!</span>
       &nbsp;
-      <a @click="cartVisibility = !cartVisibility"><span class="navbar-brand"><i class="fas fa-shopping-bag mx-2"></i>{{this.cart.length}}</span></a>
+      <span>
+      <form @submit.prevent="searchMedia">
+        <a @click="cartVisibility = !cartVisibility"><span class="navbar-brand"><i class="fas fa-shopping-bag mx-2"></i>{{this.cart.length}}</span></a>
+        <input v-model="searchTerm" type="text">
+        <button type="submit"><i class="fas fa-search"></i></button>
+      </form>
+      </span>
     </nav>
 
     <div v-show="cartVisibility" class="container-fluid mt-3">
       <!--    <img alt="Vue logo" src="./assets/logo.png">-->
       <!--    <hello-universe msg="Welcome to Your Vue.js App"/>-->
-      <library-list @update-cart="receive"></library-list>
+      <library-list :library="library" @update-cart="receive"></library-list>
     </div>
     <div v-show="!cartVisibility" class="container-fluid mt-3">
       <h1>Temp Cart</h1>
@@ -22,6 +28,10 @@
 import LibraryList from "@/components/LibraryList";
 import CartList from "@/components/CartList";
 import CartCollection from "@/models/CartCollection";
+import LibraryCollection from "@/models/LibraryCollection";
+import {Movie,EBook,Song} from "@/models/LibraryItems";
+
+const axios = require('axios').default;
 
 export default {
   name: 'App',
@@ -29,10 +39,32 @@ export default {
   data: function () {
     return {
       cart: new CartCollection(),
-      cartVisibility: true
+      cartVisibility: true,
+      searchTerm: '',
+      library: new LibraryCollection(),
+      searchResults: []
     }
   }
   ,methods:{
+    addSearchResults(){
+      for (let i = 0; i < this.searchResults.length; i++) {
+        let currentItem = this.searchResults[i]
+        switch (currentItem.kind){
+          case 'ebook':
+            console.log('added',currentItem)
+            this.library.addItem(new EBook(currentItem.artistName, currentItem.trackName, currentItem.releaseDate, currentItem.description, currentItem.averageUserRating?? 'No Rating' ))
+            break;
+          case 'song':
+            this.library.addItem(new Song(currentItem.artistName, currentItem.trackName, currentItem.releaseDate))
+            break;
+          case 'feature-movie':
+            this.library.addItem(new Movie(currentItem.trackName, currentItem.genre, currentItem.description, currentItem.releaseDate, currentItem.contentRating))
+            break;
+        }
+      }
+      console.log(this.library.length,'library items')
+
+    },
     receive(e){
       if (!this.cart.find(ex => ex === e)){
         this.cart.addItem(e);
@@ -44,6 +76,58 @@ export default {
     updateCheckouts(){
       for (let i = 0; i < this.cart.length; i++) {
         this.cart[i].checkOut();
+        console.log(this.cart[i])
+      }
+    },
+    searchMedia(){
+
+      if(this.searchTerm){
+        // clear results
+        this.searchResults = new LibraryCollection();
+
+        // build request arguments
+        let url = 'https://itunes.apple.com/search?';
+
+        let config = {
+          params:{
+            term: this.searchTerm,
+            media:'music',
+            entity:'song',
+            limit:200,
+          },
+          responseType: 'json'
+        }
+
+        // TODO: build ajax request arguments
+        axios.get(url,config)
+            .then(response => {
+              if (response.data.results.length > 0){
+                this.searchResults = response.data.results;
+                //set the results array using my custom collection decorator
+                console.log(this.searchResults)
+                //or without a customer decorator
+                //this.searchResults = response.data.items
+              }
+            }).catch(error => {
+          console.error('AJAX SEARCH ERROR:', error)
+
+          //TODO: let user know
+
+
+        }).finally(()=>{
+          //remove loading message
+          //show results page
+
+          this.addSearchResults()
+
+
+        })
+
+
+        // execute ajax request using promises
+
+        // TODO: write ajax request
+
       }
     }
   }
