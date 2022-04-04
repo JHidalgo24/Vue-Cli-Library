@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <nav class="navbar bg-dark text-light">
+    <nav class="navbar bg-dark text-warning">
       <span class="navbar-brand"><i class="fas fa-shopping-bag mx-2"></i> CHECK IT OUT!</span>
       &nbsp;
       <span>

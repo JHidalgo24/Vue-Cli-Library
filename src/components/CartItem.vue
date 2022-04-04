@@ -10,7 +10,6 @@
 </template>
 
 <script>
-import BookDetails from "@/components/BookDetails";
 import MovieDetails from "@/components/MovieDetails";
 import AlbumDetails from "@/components/AlbumDetails";
 import EBookDetails from "@/components/EBookDetails";
@@ -18,7 +17,7 @@ import SongDetails from "@/components/SongDetails";
 
 export default {
   name: "CartItem",
-  components: {EBookDetails, SongDetails,BookDetails, MovieDetails,AlbumDetails},
+  components: {EBookDetails, SongDetails, MovieDetails,AlbumDetails},
   props: {
     item: {
       type: Object,
