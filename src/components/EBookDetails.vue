@@ -10,11 +10,11 @@
 </template>
 
 <script>
-import Ebook from "@/models/LibraryItems";
+import {eBook} from "@/models/LibraryItems";
 
 export default {
   name: "EbookDetails",
-  props: {item: Ebook},
+  props: {item: eBook},
 }
 </script>
 

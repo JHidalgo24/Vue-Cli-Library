@@ -29,7 +29,7 @@ import LibraryList from "@/components/LibraryList";
 import CartList from "@/components/CartList";
 import CartCollection from "@/models/CartCollection";
 import LibraryCollection from "@/models/LibraryCollection";
-import {Movie,EBook,Song,Album} from "@/models/LibraryItems";
+import {Movie,eBook,Song,Album} from "@/models/LibraryItems";
 
 const axios = require('axios').default;
 
@@ -54,7 +54,7 @@ export default {
         if (currentItem.kind !== undefined){
         switch (currentItem.kind){
           case 'ebook':
-            this.library.addItem(new EBook(currentItem.artistName, currentItem.trackName, currentItem.releaseDate, currentItem.description, currentItem.averageUserRating?? 'No Rating',currentItem.artworkUrl100 ))
+            this.library.addItem(new eBook(currentItem.artistName, currentItem.trackName, currentItem.releaseDate, currentItem.description, currentItem.averageUserRating?? 'No Rating',currentItem.artworkUrl100 ))
             break;
           case 'song':
             this.library.addItem(new Song(currentItem.artistName, currentItem.trackName, currentItem.releaseDate))

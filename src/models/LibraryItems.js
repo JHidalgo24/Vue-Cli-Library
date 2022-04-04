@@ -85,7 +85,7 @@ class Song{
 
 }
 
-class EBook{
+class eBook{
     artistName = '';
     trackName = '';
     releaseDate = '';
@@ -106,4 +106,4 @@ class EBook{
 
 
 
-export {LibraryItem,Album, Movie,Song, EBook};
+export {LibraryItem,Album, Movie,Song, eBook};
