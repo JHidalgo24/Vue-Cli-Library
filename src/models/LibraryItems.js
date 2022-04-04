@@ -3,12 +3,10 @@ function LibraryItem(media, removeMethod){
     // this is the parent class that all books,movies,etc extend
 
     // list of possible statuses (enum)
-    const STATUSES = {CHECKED_IN: 'in', CHECKED_OUT: 'out',
-        PURCHASED: 'purchased', NOT_PURCHASED: 'not-purchased'}
+    const STATUSES = {CHECKED_IN: 'in', CHECKED_OUT: 'out'}
 
     // set the default status
     media.status = STATUSES.CHECKED_IN;
-    media.purchased = STATUSES.NOT_PURCHASED;
 
     // methods
     media.checkIn = function(){
@@ -20,7 +18,7 @@ function LibraryItem(media, removeMethod){
     }
 
     media.isAvailable = function(){
-        return this.status === STATUSES.CHECKED_IN && this.purchased === STATUSES.NOT_PURCHASED;
+        return this.status === STATUSES.CHECKED_IN
     }
 
     //  option 1

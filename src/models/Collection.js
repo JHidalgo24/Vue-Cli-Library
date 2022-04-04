@@ -5,7 +5,7 @@ export default function Collection(){
     // inherit array functionality (ES6+)
     this.__proto__ = [];
 
-    this.push(0);
+    this.push('toast');
     this.splice(0,1);
 
 

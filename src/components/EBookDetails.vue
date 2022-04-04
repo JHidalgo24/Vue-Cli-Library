@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import {Ebook} from "@/models/LibraryItems";
+import Ebook from "@/models/LibraryItems";
 
 export default {
   name: "EbookDetails",

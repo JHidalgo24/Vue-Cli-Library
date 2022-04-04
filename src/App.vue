@@ -15,10 +15,10 @@
     <div v-show="cartVisibility" class="container-fluid mt-3">
       <!--    <img alt="Vue logo" src="./assets/logo.png">-->
       <!--    <hello-universe msg="Welcome to Your Vue.js App"/>-->
-      <library-list :library="library" @update-cart="receive"></library-list>
+      <library-list @check-out-lib="checkOutLibrary" :library="library" @update-cart="receive"></library-list>
     </div>
     <div v-show="!cartVisibility" class="container-fluid mt-3">
-      <h1>Temp Cart</h1>
+      <h1>Cart</h1>
       <cart-list @check-out="updateCheckouts" @remove-cart="removeCart" :cart="cart"></cart-list>
     </div>
   </div>
@@ -47,6 +47,7 @@ export default {
   }
   ,methods:{
     addSearchResults(){
+
       for (let i = 0; i < this.searchResults.length; i++) {
         let currentItem = this.searchResults[i]
         switch (currentItem.kind){
@@ -61,7 +62,9 @@ export default {
             this.library.addItem(new Movie(currentItem.trackName, currentItem.genre, currentItem.description, currentItem.releaseDate, currentItem.contentRating))
             break;
         }
+
       }
+      this.searchResults = []
       console.log(this.library.length,'library items')
 
     },
@@ -76,14 +79,21 @@ export default {
     updateCheckouts(){
       for (let i = 0; i < this.cart.length; i++) {
         this.cart[i].checkOut();
-        console.log(this.cart[i])
       }
+
     },
+    checkOutLibrary(e){
+      e.checkOut()
+
+    }
+    ,
     searchMedia(){
+
 
       if(this.searchTerm){
         // clear results
-        this.searchResults = new LibraryCollection();
+        this.library = new LibraryCollection()
+        this.searchResults = []
 
         // build request arguments
         let url = 'https://itunes.apple.com/search?';
@@ -93,7 +103,7 @@ export default {
             term: this.searchTerm,
             media:'music',
             entity:'song',
-            limit:200,
+            limit:5,
           },
           responseType: 'json'
         }

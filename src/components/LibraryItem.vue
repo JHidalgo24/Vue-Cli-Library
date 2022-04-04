@@ -1,11 +1,11 @@
 <template>
-  <div class="card" :class="{'border-success': item.isAvailable()}">
+  <div class="card" :class="{'border-success': itemStatus}">
     <div class="card-body">
       <component :is="typeOfItem" :item="item"></component>
     </div>
     <div class="card-footer">
-      <button v-if="item.isAvailable()" @click="item.checkOut()">Check Out</button>
-      <button v-else @click="item.checkIn()">Check In</button>
+      <button v-if="itemStatus" @click="checkOutItem">Check Out</button>
+      <button v-else @click="checkOutItem">Check In</button>
       <!--                <button v-if="removeMethod" @click="removeMethod(item);">Remove</button>-->
       <!--                <button @click="$emit('remove-me', item);">Remove</button>-->
       <button @click="emitSelfRemove">Remove</button>
@@ -39,12 +39,19 @@ export default {
     },
     emitSelfRemove(){
       this.$emit('remove-store',this.item)
+    },
+    checkOutItem(){
+      this.$emit('check-out-lib',this.item)
+      //make it so the App.Vue handles the checked in or out update not the library Item since the list originates in app.vue
     }
   }
   ,
   computed: {
     typeOfItem() {
       return this.item.constructor.name + 'Details';
+    },
+    itemStatus(){
+      return this.item.isAvailable();
     }
   },
 }
