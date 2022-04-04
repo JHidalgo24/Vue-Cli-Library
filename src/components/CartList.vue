@@ -1,10 +1,23 @@
 <template>
   <div >
-  <div class="card-columns">
-    <cart-item @remove-cart="$emit('remove-cart',item)" v-for="(item, i) in cart" :key="i" :item="item"></cart-item>
+    <div class="row">
+      <div class="col-10">
+        <div class="card-columns">
+          <cart-item @remove-cart="$emit('remove-cart',item)" v-for="(item, i) in cart" :key="i" :item="item"></cart-item>
+        </div>
+      </div>
+
+      <div class="col-2">
+        <button type="button" @click="checkOutItems">Check Out All</button>
+      </div>
+    </div>
+
+
+
+
   </div>
-    <button type="button" @click="checkOutItems">Check Out All</button>
-  </div>
+
+
 </template>
 
 <script>
@@ -22,7 +35,6 @@ export default {
   methods:{
     checkOutItems(){
       this.$emit('check-out',this.cart)
-      this.cart.removeAll()
     }
   }
 }

@@ -20,11 +20,6 @@ export default function Collection(){
         return this;
     }
 
-    this.checkOutItem = function (item) {
-        item.checkOut();
-
-        return this;
-    }
 
     this.removeItem = function(item){
         this.splice(this.indexOf(item), 1);

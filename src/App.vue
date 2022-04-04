@@ -15,7 +15,7 @@
     <div v-show="cartVisibility" class="container-fluid mt-3">
       <!--    <img alt="Vue logo" src="./assets/logo.png">-->
       <!--    <hello-universe msg="Welcome to Your Vue.js App"/>-->
-      <library-list @check-out-lib="checkOutLibrary" :library="library" @update-cart="receive"></library-list>
+      <library-list :library="library" @update-cart="receive"></library-list>
     </div>
     <div v-show="!cartVisibility" class="container-fluid mt-3">
       <h1>Cart</h1>
@@ -47,6 +47,7 @@ export default {
   }
   ,methods:{
     addSearchResults(){
+      this.library = new LibraryCollection()
 
       for (let i = 0; i < this.searchResults.length; i++) {
         let currentItem = this.searchResults[i]
@@ -72,6 +73,7 @@ export default {
         }
       }
       this.searchResults = []
+
       this.library.sort((a, b) => (a.constructor > b.constructor) ? 1: -1 );
 
     },
@@ -84,22 +86,17 @@ export default {
       this.cart.removeItem(e)
     },
     updateCheckouts(){
+
       for (let i = 0; i < this.cart.length; i++) {
         this.cart[i].checkOut();
       }
 
-    },
-    checkOutLibrary(e){
-      e.checkOut()
-
+      this.cart.removeAll()
     }
     ,
     searchMedia(){
-
-
       if(this.searchTerm){
         // clear results
-        this.library = new LibraryCollection()
         this.searchResults = []
 
         // build request arguments
@@ -133,6 +130,7 @@ export default {
         }).finally(()=>{
           //remove loading message
           //show results page
+
 
           this.addSearchResults()
 
