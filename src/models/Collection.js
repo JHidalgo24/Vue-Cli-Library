@@ -20,6 +20,12 @@ export default function Collection(){
         return this;
     }
 
+    this.checkOutItem = function (item) {
+        item.checkOut();
+
+        return this;
+    }
+
     this.removeItem = function(item){
         this.splice(this.indexOf(item), 1);
 
@@ -34,6 +40,3 @@ export default function Collection(){
         return this;
     }
 }
-// standard way pre-ES6
-// LibraryCollection.prototype = [];
-// LibraryCollection.prototype.constructor = LibraryCollection;

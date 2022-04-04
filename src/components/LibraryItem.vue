@@ -1,5 +1,5 @@
 <template>
-  <div class="card" :class="{'border-success': itemStatus}">
+  <div  class="card" :class="{'border-success': itemStatus}">
     <div class="card-body">
       <component :is="typeOfItem" :item="item"></component>
     </div>

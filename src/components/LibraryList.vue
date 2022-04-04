@@ -1,6 +1,6 @@
 <template>
   <div class="card-columns">
-    <library-item @check-out-lib="checkOutLib" @remove-store="removeMe" @update-cart="$emit('update-cart',item)" v-for="(item, i) in library" :key="i" :item="item"></library-item>
+    <library-item  @check-out-lib="checkOutLib" @remove-store="removeMe" @update-cart="$emit('update-cart',item)" v-for="(item, i) in library" :key="i" :item="item"></library-item>
   </div>
 </template>
 

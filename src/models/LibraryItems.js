@@ -1,4 +1,6 @@
 
+
+
 function LibraryItem(media, removeMethod){
     // this is the parent class that all books,movies,etc extend
 
@@ -36,40 +38,37 @@ function LibraryItem(media, removeMethod){
     return media;
 }
 
-// this is a constructor function
-// we use TitleCase to represent classes/prototypes/constructor functions
-function Book(title, pages){
-    this.title = title;
-    this.pages = pages;
-}
-
-// or ES6 syntactic sugar (these are not really classes in the traditional sense)
-class Movie {
-    trackName = '';
-    genre = ''
-    description = ''
-    releaseDate = ''
-    contentRating = ''
-    constructor(trackName, genre, description, releaseDate, contentRating){
-        this.trackName = trackName;
-        this.genre = genre
-        this.description = description
-        this.releaseDate = releaseDate
-        this.contentRating = contentRating
-    }
-}
 
 class Album{
     collectionName = '';
     artistName = '';
     trackCount = '';
     releaseDate = ''
+    img = ''
 
-    constructor(collectionName, artistName, trackCount,releaseDate) {
+    constructor(collectionName, artistName, trackCount,releaseDate, img) {
         this.collectionName = collectionName;
         this.artistName = artistName;
         this.trackCount = trackCount;
         this.releaseDate = releaseDate
+        this.img = img
+    }
+}
+
+class Movie {
+    trackName = '';
+    genre = ''
+    description = ''
+    releaseDate = ''
+    contentRating = ''
+    img = ''
+    constructor(trackName, genre, description, releaseDate, contentRating,img){
+        this.trackName = trackName;
+        this.genre = genre
+        this.description = description
+        this.releaseDate = releaseDate
+        this.contentRating = contentRating
+        this.img = img
     }
 }
 
@@ -92,17 +91,19 @@ class EBook{
     releaseDate = '';
     description = '';
     averageUserRating = 0;
+    img = ''
 
-    constructor(artistName, trackName, releaseDate,description,averageUserRating) {
+    constructor(artistName, trackName, releaseDate,description,averageUserRating,img) {
         this.artistName = artistName;
         this.trackName = trackName;
         this.releaseDate = releaseDate;
         this.description = description
         this.averageUserRating = averageUserRating
+        this.img = img
     }
 
 }
 
 
 
-export {LibraryItem, Book, Movie, Album,Song, EBook};
+export {LibraryItem,Album, Movie,Song, EBook};

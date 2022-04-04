@@ -29,7 +29,7 @@ import LibraryList from "@/components/LibraryList";
 import CartList from "@/components/CartList";
 import CartCollection from "@/models/CartCollection";
 import LibraryCollection from "@/models/LibraryCollection";
-import {Movie,EBook,Song} from "@/models/LibraryItems";
+import {Movie,EBook,Song,Album} from "@/models/LibraryItems";
 
 const axios = require('axios').default;
 
@@ -50,22 +50,29 @@ export default {
 
       for (let i = 0; i < this.searchResults.length; i++) {
         let currentItem = this.searchResults[i]
+        if (currentItem.kind !== undefined){
         switch (currentItem.kind){
           case 'ebook':
-            console.log('added',currentItem)
-            this.library.addItem(new EBook(currentItem.artistName, currentItem.trackName, currentItem.releaseDate, currentItem.description, currentItem.averageUserRating?? 'No Rating' ))
+            this.library.addItem(new EBook(currentItem.artistName, currentItem.trackName, currentItem.releaseDate, currentItem.description, currentItem.averageUserRating?? 'No Rating',currentItem.artworkUrl100 ))
             break;
           case 'song':
             this.library.addItem(new Song(currentItem.artistName, currentItem.trackName, currentItem.releaseDate))
             break;
           case 'feature-movie':
-            this.library.addItem(new Movie(currentItem.trackName, currentItem.genre, currentItem.description, currentItem.releaseDate, currentItem.contentRating))
+            this.library.addItem(new Movie(currentItem.trackName, currentItem.primaryGenreName, currentItem.longDescription, currentItem.releaseDate, currentItem.contentAdvisoryRating,currentItem.artworkUrl100))
             break;
         }
-
+        }
+        else{
+          switch (currentItem.collectionType){
+            case 'Album':
+              this.library.addItem(new Album(currentItem.collectionName,currentItem.artistName,currentItem.trackCount,currentItem.releaseDate, currentItem.artworkUrl100 ))
+              break;
+          }
+        }
       }
       this.searchResults = []
-      console.log(this.library.length,'library items')
+      this.library.sort((a, b) => (a.constructor > b.constructor) ? 1: -1 );
 
     },
     receive(e){
@@ -101,9 +108,9 @@ export default {
         let config = {
           params:{
             term: this.searchTerm,
-            media:'music',
-            entity:'song',
-            limit:5,
+            media:' music, ebook,movie ',
+            entity:' album, ebook,movie ',
+            limit: 30
           },
           responseType: 'json'
         }
@@ -114,7 +121,6 @@ export default {
               if (response.data.results.length > 0){
                 this.searchResults = response.data.results;
                 //set the results array using my custom collection decorator
-                console.log(this.searchResults)
                 //or without a customer decorator
                 //this.searchResults = response.data.items
               }

@@ -1,8 +1,11 @@
 <template>
   <div class="book">
-    <h3 class="card-title">{{item.title}}</h3>
-    <p class="card-text">Artist: {{item.artist}} | Track Count: {{item.trackCount}}</p>
 
+    <img :src=item.img style="width: 25%" class="card-img-top" alt="...">
+
+    <h3 class="card-title">Album: {{item.collectionName}}</h3>
+    <p class="card-text">Artist: {{item.artistName}} | Track Count: {{item.trackCount}}</p>
+    <p class="card-text">Release Date: {{item.releaseDate.slice(0,10)}} </p>
   </div>
 </template>
 
