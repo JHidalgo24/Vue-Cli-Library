@@ -104,7 +104,7 @@ export default {
 
         let config = {
           params:{
-            term: this.searchTerm,
+            term: this.searchTerm.replace(' ','+'),
             media:' music, ebook,movie ',
             entity:' album, ebook,movie ',
             limit: 30
